@@ -7,11 +7,11 @@
     "email": "<Your Email Here>"
   },
   "scripts": {
-    "dev": "npm run build && npm run start",
+    "dev": "npm run build && npm run start -- 8085",
     "clean": "rimraf dist && rimraf public",
     "prebuild": "npm run clean",
     "build": "webpack --config webpack.config.js",
-    "start": "npm run build && http-server ./public -p"
+    "start": "http-server ./public -p"
   },
   "license": "<Your License Here>",
   "dependencies": {

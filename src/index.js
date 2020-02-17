@@ -12,7 +12,10 @@ const assets = {
 
     Textures: {},
 
-    Models: { 'plane_1': 'assets/models/plane_1.glb' },
+    Models: {
+        'plane_1': 'assets/models/plane_1.glb',
+        'car': 'assets/models/car.glb'
+    },
 
     General: {}
 };

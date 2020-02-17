@@ -2,9 +2,12 @@ import {
     App,
     ControlsManager,
     SceneManager,
-    SunLight,
-    ModelsEngine
+    AmbientLight,
+    ModelsEngine,
+    ScriptManager
 } from 'mage-engine';
+
+import CarScript from '../carScript';
 
 const GRID_SIZE = 1000;
 const GRID_STEP = 100;
@@ -12,7 +15,7 @@ const GRID_STEP = 100;
 export default class FlatGrid extends App {
 
     addAmbientLight() {
-        const light = new SunLight({
+        const light = new AmbientLight({
             color: 0xeeeeee,
             intensity: 1,
             target: { x: 0, y: 0, z: 0 },
@@ -43,13 +46,21 @@ export default class FlatGrid extends App {
 
     onCreate() {
         ControlsManager.setOrbitControl();
-        SceneManager.setClearColor(0x222222);
+        SceneManager.setClearColor(0xa8e6cf);
 
         this.addAmbientLight();
         this.setUpCamera();
 
-        ModelsEngine.getModel('plane_1');
+        ScriptManager.create('carScript', new CarScript());
 
-        this.sceneHelper.addGrid(GRID_SIZE, GRID_STEP);
+        const plane = ModelsEngine.getModel('plane_1');
+        const car = ModelsEngine.getModel('car');
+
+        plane.position({ y: -45 });
+
+        car.addScript('carScript');
+        car.start();
+
+        // this.sceneHelper.addGrid(GRID_SIZE, GRID_STEP);
     }
 }
