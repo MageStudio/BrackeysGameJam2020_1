@@ -4,7 +4,8 @@ import {
     SceneManager,
     AmbientLight,
     ModelsEngine,
-    ScriptManager
+    ScriptManager,
+    ImagesEngine
 } from 'mage-engine';
 
 import CarScript from '../carScript';
@@ -57,6 +58,7 @@ export default class FlatGrid extends App {
         const car = ModelsEngine.getModel('car');
 
         plane.position({ y: -45 });
+        plane.setTexture('prototype', { repeat: { x: 10, y: 10 } });
 
         car.addScript('carScript');
         car.setWireframe(true);

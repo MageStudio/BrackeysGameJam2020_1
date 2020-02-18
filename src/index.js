@@ -10,7 +10,9 @@ const assets = {
 
     Scripts: {},
 
-    Textures: {},
+    Textures: {
+        'prototype': 'assets/textures/prototype.png'
+    },
 
     Models: {
         'plane_1': 'assets/models/plane_1.glb',
