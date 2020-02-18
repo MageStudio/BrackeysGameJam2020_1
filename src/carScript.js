@@ -32,6 +32,7 @@ export default class CarScript extends BaseScript {
         this.backwards = false;
 
         this.speed = 0;
+        this.speed_y = 0;
         this.orientation = 0;
     }
 
@@ -100,11 +101,26 @@ export default class CarScript extends BaseScript {
             }
         }
 
+        // always updating y
+        this.speed_y -= 9.8 * 100.0 * dt;
+        if (this.mesh.isOnObject()) {
+			this.speed_y = Math.max(0, this.speed_y);
+			this.canJump = true;
+		}
+
         const forwardDelta = this.speed * dt;
 
-        this.mesh.mesh.position.x += Math.sin( this.orientation ) * forwardDelta;
-        this.mesh.mesh.position.z += Math.cos( this.orientation ) * forwardDelta;
-        this.mesh.mesh.rotation.y = this.orientation;
+        const { x, y, z } = this.mesh.position();
+
+        this.mesh.position({
+            x: x + Math.sin( this.orientation ) * forwardDelta,
+            z: z + Math.cos( this.orientation ) * forwardDelta,
+            y: y + this.speed_y * dt
+        })
+
+        this.mesh.rotation({
+            y: this.orientation
+        });
     }
 
     update(dt) {

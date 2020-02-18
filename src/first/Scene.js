@@ -51,7 +51,7 @@ export default class FlatGrid extends App {
         this.addAmbientLight();
         this.setUpCamera();
 
-        ScriptManager.create('carScript', new CarScript());
+        ScriptManager.create('carScript', CarScript);
 
         const plane = ModelsEngine.getModel('plane_1');
         const car = ModelsEngine.getModel('car');
@@ -59,7 +59,9 @@ export default class FlatGrid extends App {
         plane.position({ y: -45 });
 
         car.addScript('carScript');
-        car.start();
+        car.setWireframe(true);
+
+        window.car = car;
 
         // this.sceneHelper.addGrid(GRID_SIZE, GRID_STEP);
     }
