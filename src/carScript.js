@@ -15,7 +15,6 @@ export default class CarScript extends BaseScript {
         SceneManager.camera.lookAt(0, 0, 0);
 
         this.TIME_FRACTION = 0.005;
-        this.canjump = true;
 
         this.mesh = mesh;
 
@@ -105,7 +104,6 @@ export default class CarScript extends BaseScript {
         this.speed_y -= 9.8 * 100.0 * dt;
         if (this.mesh.isOnObject()) {
 			this.speed_y = Math.max(0, this.speed_y);
-			this.canJump = true;
 		}
 
         const forwardDelta = this.speed * dt;

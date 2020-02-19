@@ -17,7 +17,7 @@ export default class FlatGrid extends App {
 
     addAmbientLight() {
         const light = new AmbientLight({
-            color: 0xeeeeee,
+            color: 0xffffff,
             intensity: 1,
             target: { x: 0, y: 0, z: 0 },
             name: 'sunlight'
@@ -54,16 +54,17 @@ export default class FlatGrid extends App {
 
         ScriptManager.create('carScript', CarScript);
 
-        const plane = ModelsEngine.getModel('plane_1');
+        const plane = ModelsEngine.getModel('plane_2');
         const car = ModelsEngine.getModel('car');
 
         plane.position({ y: -45 });
-        plane.setTexture('prototype', { repeat: { x: 10, y: 10 } });
+        plane.setTextureMap('prototype', { repeat: { x: 10, y: 10 } });
 
+        car.scale({x : 0.5, y: 0.5, z: 0.5 });
         car.addScript('carScript');
         car.setWireframe(true);
 
-        window.car = car;
+        window.plane = plane;
 
         // this.sceneHelper.addGrid(GRID_SIZE, GRID_STEP);
     }

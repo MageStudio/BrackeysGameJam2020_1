@@ -16,6 +16,7 @@ const assets = {
 
     Models: {
         'plane_1': 'assets/models/plane_1.glb',
+        'plane_2': 'assets/models/plane_2.glb',
         'car': 'assets/models/car.glb'
     },
 
