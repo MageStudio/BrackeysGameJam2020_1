@@ -8,8 +8,8 @@ export default class CarScript extends BaseScript {
 
     start(mesh) {
         Input.enable();
-        Input.addEventListener('keyDown', this.onKeyDown.bind(this));
-        Input.addEventListener('keyUp', this.onKeyUp.bind(this));
+        //Input.addEventListener('keyDown', this.onKeyDown.bind(this));
+        //Input.addEventListener('keyUp', this.onKeyUp.bind(this));
 
         SceneManager.camera.position({y: 120, z: 250});
         SceneManager.camera.lookAt(0, 0, 0);
@@ -67,6 +67,13 @@ export default class CarScript extends BaseScript {
     exponentialEaseOut(k) { return k === 1 ? 1 : - Math.pow(2, - 10 * k) + 1; }
     clamp(value, min, max) { return Math.min(Math.max(value, min), max); }
 
+    updateInput() {
+        this.forward = Input.keyboard.isPressed('w');
+        this.backwards = Input.keyboard.isPressed('s');
+        this.right = Input.keyboard.isPressed('d');
+        this.left = Input.keyboard.isPressed('a');
+    }
+
     updatePosition(dt) {
 
         if (this.forward) {
@@ -122,6 +129,7 @@ export default class CarScript extends BaseScript {
     }
 
     update(dt) {
+        this.updateInput();
         this.updatePosition(dt);
     }
 }
