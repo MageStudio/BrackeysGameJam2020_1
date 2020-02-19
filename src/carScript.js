@@ -1,4 +1,6 @@
-import { BaseScript, Input, SceneManager } from 'mage-engine';
+import { BaseScript, Input, constants } from 'mage-engine';
+
+const { VECTOR_DOWN, DOWN } = constants;
 
 export default class CarScript extends BaseScript {
 
@@ -8,63 +10,28 @@ export default class CarScript extends BaseScript {
 
     start(mesh) {
         Input.enable();
-        //Input.addEventListener('keyDown', this.onKeyDown.bind(this));
-        //Input.addEventListener('keyUp', this.onKeyUp.bind(this));
-
-        SceneManager.camera.position({y: 120, z: 250});
-        SceneManager.camera.lookAt(0, 0, 0);
-
-        this.TIME_FRACTION = 0.005;
 
         this.mesh = mesh;
-
-        this.position = mesh.position();
+        this.mesh.setRayColliders([VECTOR_DOWN], { far: 8 });
 
         this.FW_ACC = 100;
         this.BW_ACC = 100;
         this.ANG_SPEED = 2.5;
 
-        this.maxSpeed = 275;
-        this.maxReverseSpeed = -275;
+        this.maxSpeed = 400;
+        this.maxReverseSpeed = -this.maxSpeed;
 
         this.forward = false;
         this.backwards = false;
+        this.left = false;
+        this.right = false;
 
         this.speed = 0;
         this.speed_y = 0;
         this.orientation = 0;
     }
 
-
-    onKeyDown(e) {
-        if (Input.keyboard.isPressed('w')) {
-            this.forward = true;
-        }
-        if (Input.keyboard.isPressed('s')) {
-            this.backwards = true;
-        }
-        if (Input.keyboard.isPressed('d')) {
-            this.right = true;
-        }
-        if (Input.keyboard.isPressed('a')) {
-            this.left = true;
-        }
-    }
-
-    onKeyUp(e) {
-        switch (e.event.key) {
-            case 'w':
-                this.forward = false;
-            case 's':
-                this.backwards = false;
-            case 'a':
-                this.left = false;
-            case 'd':
-                this.right = false;
-        }
-    }
-
-    exponentialEaseOut(k) { return k === 1 ? 1 : - Math.pow(2, - 10 * k) + 1; }
+    exponentialEaseOut(k) { return k === 1 ? 10 : - Math.pow(2, - 2 * k) + 5; }
     clamp(value, min, max) { return Math.min(Math.max(value, min), max); }
 
     updateInput() {
@@ -72,6 +39,14 @@ export default class CarScript extends BaseScript {
         this.backwards = Input.keyboard.isPressed('s');
         this.right = Input.keyboard.isPressed('d');
         this.left = Input.keyboard.isPressed('a');
+    }
+
+    updateYSpeed(dt) {
+        this.speed_y -= 9.8 * 100.0 * dt;
+        const collisions = this.mesh.checkCollisions();
+        if (collisions.length > 0 && collisions[0] === DOWN) {
+            this.speed_y = Math.max(0, this.speed_y);
+        }
     }
 
     updatePosition(dt) {
@@ -86,12 +61,12 @@ export default class CarScript extends BaseScript {
 
         var dir = 1;
 
-        if (this.left) {
+        if (this.left && this.forward) {
             this.orientation += dt * this.ANG_SPEED;
             this.speed = this.clamp(this.speed + dir * dt * this.FW_ACC, this.maxReverseSpeed, this.maxSpeed);
         }
 
-        if (this.right) {
+        if (this.right && this.forward) {
             this.orientation -= dt * this.ANG_SPEED;
             this.speed = this.clamp(this.speed + dir * dt * this.FW_ACC, this.maxReverseSpeed, this.maxSpeed);
         }
@@ -108,10 +83,7 @@ export default class CarScript extends BaseScript {
         }
 
         // always updating y
-        this.speed_y -= 9.8 * 100.0 * dt;
-        if (this.mesh.isOnObject()) {
-			this.speed_y = Math.max(0, this.speed_y);
-		}
+        this.updateYSpeed(dt);
 
         const forwardDelta = this.speed * dt;
 
