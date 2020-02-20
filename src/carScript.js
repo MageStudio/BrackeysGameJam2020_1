@@ -12,7 +12,7 @@ export default class CarScript extends BaseScript {
         Input.enable();
 
         this.mesh = mesh;
-        this.mesh.setRayColliders([VECTOR_DOWN], { far: 8 });
+        this.mesh.setRayColliders([VECTOR_DOWN], { far: 22, near: 20, debug: true });
 
         this.FW_ACC = 100;
         this.BW_ACC = 100;
@@ -61,12 +61,12 @@ export default class CarScript extends BaseScript {
 
         var dir = 1;
 
-        if (this.left && this.forward) {
+        if (this.left && this.speed !== 0) {
             this.orientation += dt * this.ANG_SPEED;
             this.speed = this.clamp(this.speed + dir * dt * this.FW_ACC, this.maxReverseSpeed, this.maxSpeed);
         }
 
-        if (this.right && this.forward) {
+        if (this.right && this.speed !== 0) {
             this.orientation -= dt * this.ANG_SPEED;
             this.speed = this.clamp(this.speed + dir * dt * this.FW_ACC, this.maxReverseSpeed, this.maxSpeed);
         }
