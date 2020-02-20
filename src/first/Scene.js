@@ -5,13 +5,12 @@ import {
     AmbientLight,
     ModelsEngine,
     ScriptManager,
+    ParticleEngine,
     ImagesEngine
 } from 'mage-engine';
 
 import CarScript from '../carScript';
 
-const GRID_SIZE = 1000;
-const GRID_STEP = 100;
 
 export default class FlatGrid extends App {
 
@@ -65,6 +64,10 @@ export default class FlatGrid extends App {
         car.setWireframe(true);
 
         window.plane = plane;
+
+        const Fountain = ParticleEngine.get('Fountain');
+
+        ParticleEngine.addParticleEmitter(new Fountain());
 
         // this.sceneHelper.addGrid(GRID_SIZE, GRID_STEP);
     }
