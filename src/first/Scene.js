@@ -10,7 +10,7 @@ import {
 } from 'mage-engine';
 
 import CarScript from '../carScript';
-
+import Rotation from '../rotation';
 
 export default class FlatGrid extends App {
 
@@ -52,6 +52,7 @@ export default class FlatGrid extends App {
         this.setUpCamera();
 
         ScriptManager.create('carScript', CarScript);
+        ScriptManager.create('rotation', Rotation);
 
         const plane = ModelsEngine.getModel('plane_2');
         const car = ModelsEngine.getModel('car');
@@ -59,15 +60,19 @@ export default class FlatGrid extends App {
         plane.position({ y: -45 });
         plane.setTextureMap('prototype', { repeat: { x: 10, y: 10 } });
 
+        plane.add(car);
+
         car.scale({x : 0.5, y: 0.5, z: 0.5 });
         car.addScript('carScript');
         car.setWireframe(true);
+
+        plane.addScript('rotation');
 
         window.plane = plane;
 
         const Fountain = ParticleEngine.get('Fountain');
 
-        ParticleEngine.addParticleEmitter(new Fountain());
+        ParticleEngine.addParticleEmitter(new Fountain({ container: car.mesh }));
 
         // this.sceneHelper.addGrid(GRID_SIZE, GRID_STEP);
     }

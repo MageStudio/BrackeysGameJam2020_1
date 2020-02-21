@@ -30,16 +30,6 @@ module.exports = {
             'node_modules'
         ]
     },
-    optimization: {
-        minimizer: [
-            new UglifyJSPlugin({
-                uglifyOptions: {
-                    mangle: false,
-                    keep_fnames: true
-                }
-            })
-        ]
-    },
     performance: {
         hints: false,
         maxAssetSize: 1000000,
