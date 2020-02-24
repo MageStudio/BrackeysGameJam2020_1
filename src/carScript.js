@@ -31,8 +31,24 @@ export default class CarScript extends BaseScript {
         this.orientation = 0;
     }
 
+    percentage(value, max) {
+        return Math.abs(value) * 100 / max;
+    }
     exponentialEaseOut(k) { return k === 1 ? 10 : - Math.pow(2, - 2 * k) + 5; }
     clamp(value, min, max) { return Math.min(Math.max(value, min), max); }
+
+    getDetuneFromSpeed = () => {
+        const max = 1200;
+        const min = -1200;
+
+        return (Math.abs(this.speed) * (max * 2) / this.maxSpeed) + min;
+    }
+
+    updateSound() {
+        if (this.mesh.sound) {
+            this.mesh.sound.detune(this.getDetuneFromSpeed());
+        }
+    }
 
     updateInput() {
         this.forward = Input.keyboard.isPressed('w');
@@ -103,5 +119,6 @@ export default class CarScript extends BaseScript {
     update(dt) {
         this.updateInput();
         this.updatePosition(dt);
+        this.updateSound();
     }
 }

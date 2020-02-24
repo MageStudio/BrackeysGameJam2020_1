@@ -2,7 +2,9 @@ import { Router } from 'mage-engine';
 import Scene from './first/Scene';
 
 const assets = {
-    Audio: {},
+    Audio: {
+        'engine': 'assets/audio/engine.mp3'
+    },
 
     Video: {},
 
@@ -11,12 +13,13 @@ const assets = {
     Scripts: {},
 
     Textures: {
-        'prototype': 'assets/textures/prototype.png'
+        'prototype': 'assets/textures/prototype.png',
+        'level1': 'assets/textures/level_1.png',
+        'smoke': 'assets/textures/smoke_transparent.png'
     },
 
     Models: {
-        'plane_1': 'assets/models/plane_1.glb',
-        'plane_2': 'assets/models/plane_2.glb',
+        'level_1': 'assets/models/plane.level.1.glb',
         'car': 'assets/models/car.glb'
     },
 
