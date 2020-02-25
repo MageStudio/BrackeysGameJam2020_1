@@ -1,4 +1,4 @@
 {
-    "name": "pathfinding",
+    "name": "holes",
     "routes": [{ "src": "/", "dest": "/index.html" }]
 }

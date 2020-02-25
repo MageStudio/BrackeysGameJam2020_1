@@ -14,8 +14,8 @@ const assets = {
 
     Textures: {
         'prototype': 'assets/textures/prototype.png',
-        'level1': 'assets/textures/level_1.png',
-        'smoke': 'assets/textures/smoke_transparent.png'
+        'level1': 'assets/textures/level_1.test.png',
+        'smoke': 'assets/textures/smoke_particle.png'
     },
 
     Models: {

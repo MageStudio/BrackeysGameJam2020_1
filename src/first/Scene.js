@@ -24,7 +24,7 @@ export default class FlatGrid extends App {
     addAmbientLight() {
         const light = new AmbientLight({
             color: 0xffffff,
-            intensity: 1,
+            intensity: 0.4,
             target: { x: 0, y: 0, z: 0 },
             name: 'ambientlight'
         });
@@ -37,7 +37,7 @@ export default class FlatGrid extends App {
     addSunlight() {
         const light = new SunLight({
             color: 0xf9ecec,
-            intensity: 1,
+            intensity: 0.3,
             target: { x: 50, y: 0, z: 50 },
             name: 'sunlight'
         });
@@ -92,9 +92,10 @@ export default class FlatGrid extends App {
         this.car = ModelsEngine.getModel('car');
 
         plane.position({ y: -45 });
+        plane.rotation({ x: Math.PI });
         //plane.setColor(0xbbded6);
         //plane.setColor(0xecf2f9);
-        plane.setTextureMap('level1', { repeat: { x: 1, y: 1} });
+        plane.setTextureMap('level1', { repeat: { x: 1, y: 1 } });
 
         window.plane = plane;
 
