@@ -24,8 +24,7 @@ export default class FlatGrid extends App {
     addAmbientLight() {
         const light = new AmbientLight({
             color: 0xffffff,
-            intensity: 0.4,
-            target: { x: 0, y: 0, z: 0 },
+            intensity: 0.1,
             name: 'ambientlight'
         });
 
@@ -60,51 +59,48 @@ export default class FlatGrid extends App {
     };
 
     setUpCamera = () => {
-        SceneManager.camera.position({y: 300, z: 700});
+        window.camera = SceneManager.camera;
+        SceneManager.camera.position({y: 11, z: 17});
         SceneManager.camera.lookAt(0, 0, 0);
     };
 
     setUpCar = () => {
+        this.car = ModelsEngine.getModel('car');
         this.car.addScript('carScript');
-        //this.car.setWireframe(true);
+        this.car.setColor(0xa8e6cf);
         this.car.addSound('engine', { loop: true, autoplay: true });
         this.car.sound.setVolume(5);
-        this.car.scale({x : 0.5, y: 0.5, z: 0.5 });
+        // this.car.scale({x : 0.5, y: 0.5, z: 0.5 });
     }
 
-    onCreate() {
-        ControlsManager.setOrbitControl();
-        SceneManager.setClearColor(0xa8e6cf);
-        AudioEngine.setVolume(5);
-
-        this.addAmbientLight();
-        this.addSunlight();
-        this.setUpCamera();
-
-        this.enableUI(UIContainer, {
-            onOverlayButtonClick: this.setUpCar
-        });
-
-        ScriptManager.create('carScript', CarScript);
-        ScriptManager.create('rotation', Rotation);
-
-        const plane = ModelsEngine.getModel('level_1');
-        this.car = ModelsEngine.getModel('car');
-
-        plane.position({ y: -45 });
-        plane.rotation({ x: Math.PI });
+    setUpPlane = () => {
+        const plane = ModelsEngine.getModel('plane');
+        //plane.position({ y: -45 });
+        //plane.rotation({ x: Math.PI });
         //plane.setColor(0xbbded6);
-        //plane.setColor(0xecf2f9);
-        plane.setTextureMap('level1', { repeat: { x: 1, y: 1 } });
+        plane.setColor(0xecf2f9);
+        //plane.setTextureMap('level1', { repeat: { x: 1, y: 1 } });
 
         window.plane = plane;
+    };
 
-        //plane.add(car);
+    setUpTargets = () => {
+        const targetBlue = ModelsEngine.getModel('target.blue');
+        const targetRed = ModelsEngine.getModel('target.red');
 
+        targetBlue.setColor(0xa8e6cf);
+        targetRed.setColor(0xffaaa5);
 
+        const targetBlueGoal = ModelsEngine.getModel('target.blue.goal');
+        const targetRedGoal = ModelsEngine.getModel('target.red.goal');
 
-        //plane.addScript('rotation');
+        targetBlueGoal.setColor(0xa8e6cf);
+        targetBlueGoal.setOpacity(0.1);
+        targetRedGoal.setColor(0xffaaa5);
+        targetRedGoal.setOpacity(0.1);
+    }
 
+    createSmokeEffect = () => {
         const Fountain = ParticleEngine.get('Fountain');
 
         const fountainOptions = {
@@ -128,5 +124,28 @@ export default class FlatGrid extends App {
         };
 
         ParticleEngine.addParticleEmitter(new Fountain(fountainOptions));
+    };
+
+    setUp = () => {
+        this.setUpPlane();
+        this.setUpTargets();
+        this.setUpCar();
+    };
+
+    onCreate() {
+        //ControlsManager.setOrbitControl();
+        SceneManager.setClearColor(0xa8e6cf);
+        AudioEngine.setVolume(5);
+
+        this.addAmbientLight();
+        this.addSunlight();
+        this.setUpCamera();
+
+        this.enableUI(UIContainer, {
+            onOverlayButtonClick: this.setUp
+        });
+
+        ScriptManager.create('carScript', CarScript);
+        ScriptManager.create('rotation', Rotation);
     }
 }

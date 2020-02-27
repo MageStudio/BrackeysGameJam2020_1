@@ -19,6 +19,13 @@ const assets = {
     },
 
     Models: {
+        'plane': 'assets/models/plane.glb',
+        'target.blue': 'assets/models/target.blue.glb',
+        'target.red': 'assets/models/target.red.glb',
+        'target.red.goal': 'assets/models/target.red.goal.glb',
+        'target.blue.goal': 'assets/models/target.blue.goal.glb',
+
+
         'level_1': 'assets/models/plane.level.1.glb',
         'car': 'assets/models/car.glb'
     },

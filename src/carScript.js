@@ -1,4 +1,4 @@
-import { BaseScript, Input, constants } from 'mage-engine';
+import { BaseScript, Input, constants, SceneManager } from 'mage-engine';
 
 const { VECTOR_DOWN, DOWN } = constants;
 
@@ -12,13 +12,16 @@ export default class CarScript extends BaseScript {
         Input.enable();
 
         this.mesh = mesh;
-        this.mesh.setRayColliders([VECTOR_DOWN], { far: 22, near: 20, debug: true });
+        this.mesh.setRayColliders([VECTOR_DOWN], { far: 2, near: 0, debug: true });
 
-        this.FW_ACC = 100;
-        this.BW_ACC = 100;
+        this.FW_ACC = 3;
+        this.BW_ACC = 3;
         this.ANG_SPEED = 2.5;
 
-        this.maxSpeed = 400;
+        this.mass = 1;
+        this.gravity = 9.8;
+
+        this.maxSpeed = 10;
         this.maxReverseSpeed = -this.maxSpeed;
 
         this.forward = false;
@@ -58,7 +61,7 @@ export default class CarScript extends BaseScript {
     }
 
     updateYSpeed(dt) {
-        this.speed_y -= 9.8 * 100.0 * dt;
+        this.speed_y -= this.gravity * this.mass * dt;
         const collisions = this.mesh.checkCollisions();
         if (collisions.length > 0 && collisions[0] === DOWN) {
             this.speed_y = Math.max(0, this.speed_y);
@@ -116,9 +119,15 @@ export default class CarScript extends BaseScript {
         });
     }
 
+    updateCamera() {
+        const { x, y, z } = this.mesh.position();
+        SceneManager.camera.lookAt(x, y, z);
+    }
+
     update(dt) {
         this.updateInput();
         this.updatePosition(dt);
         this.updateSound();
+        this.updateCamera();
     }
 }
