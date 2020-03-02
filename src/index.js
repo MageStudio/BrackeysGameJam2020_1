@@ -15,13 +15,15 @@ const assets = {
     Textures: {
         'prototype': 'assets/textures/prototype.png',
         'level1': 'assets/textures/level_1.test.png',
-        'smoke': 'assets/textures/smoke_particle.png'
+        'car': 'assets/textures/car.png',
+        'smoke': 'assets/textures/smoke_particle.png',
+        'circle': 'assets/textures/circle.texture.png'
     },
 
     Models: {
         'plane': 'assets/models/plane.glb',
-        'target.blue': 'assets/models/target.blue.glb',
-        'target.red': 'assets/models/target.red.glb',
+        'target.blue': 'assets/models/target.blue.gltf',
+        'target.red': 'assets/models/target.red.gltf',
         'target.red.goal': 'assets/models/target.red.goal.glb',
         'target.blue.goal': 'assets/models/target.blue.goal.glb',
 
