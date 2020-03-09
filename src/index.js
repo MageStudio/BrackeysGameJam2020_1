@@ -26,6 +26,12 @@ const assets = {
         'target.red': 'assets/models/target.red.gltf',
         'target.red.goal': 'assets/models/target.red.goal.glb',
         'target.blue.goal': 'assets/models/target.blue.goal.glb',
+        'buggy.blue': 'assets/models/buggy.gltf',
+
+        'wheel.rear.left': 'assets/models/wheel.rear.left.gltf',
+        'wheel.rear.right': 'assets/models/wheel.rear.right.gltf',
+        'wheel.front.left': 'assets/models/wheel.front.left.gltf',
+        'wheel.front.right': 'assets/models/wheel.front.right.gltf',
 
 
         'level_1': 'assets/models/plane.level.1.glb',

@@ -58,14 +58,23 @@ export default class FlatGrid extends App {
     };
 
     setUpCar = () => {
-        this.car = ModelsEngine.getModel('car');
+        this.car = ModelsEngine.getModel('buggy.blue');
         this.car.addScript('carScript');
         this.car.setColor(0xa8e6cf);
         this.car.addSound('engine', { loop: true, autoplay: true });
         this.car.sound.setVolume(2);
-        //this.car.setMaterialFromName('lambert');
+        this.car.setMaterialFromName('lambert');
         //this.car.setTextureMap('car');
         // this.car.scale({x : 0.5, y: 0.5, z: 0.5 });
+
+        const wheels = [
+            ModelsEngine.getModel('wheel.front.left'),
+            ModelsEngine.getModel('wheel.front.right'),
+            ModelsEngine.getModel('wheel.rear.left'),
+            ModelsEngine.getModel('wheel.rear.right')
+        ];
+
+        wheels.forEach(wheel => this.car.add(wheel));
 
         this.setUpSmokeEffect();
     }
