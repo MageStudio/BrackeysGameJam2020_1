@@ -22,7 +22,7 @@ import Rotation from '../rotation';
 export default class FlatGrid extends App {
 
     addAmbientLight() {
-        new AmbientLight({
+        window.ambient = new AmbientLight({
             color: 0xffffff,
             intensity: 0.1,
             name: 'ambientlight'
@@ -30,12 +30,14 @@ export default class FlatGrid extends App {
     }
 
     addSunlight() {
-        new SunLight({
+        window.sun = new SunLight({
             color: 0xf9ecec,
-            intensity: 0.3,
+            intensity: 1,
             position: { x: 10, y: 10, z: 10 },
             target: { x: 0, y: 0, z: 5 },
-            name: 'sunlight'
+            name: 'sunlight',
+            near: 0.1,
+            far: 50
         });
     }
 
@@ -59,13 +61,14 @@ export default class FlatGrid extends App {
 
     setUpCar = () => {
         this.car = ModelsEngine.getModel('buggy.blue');
-        this.car.addScript('carScript');
+        window.car = this.car;
         this.car.setColor(0xa8e6cf);
-        this.car.addSound('engine', { loop: true, autoplay: true });
+        this.car.addSound('engine', { loop: true, autoplay: false });
         this.car.sound.setVolume(2);
+        this.car.sound.start();
         this.car.setMaterialFromName('lambert');
-        //this.car.setTextureMap('car');
-        // this.car.scale({x : 0.5, y: 0.5, z: 0.5 });
+        this.car.scale({x : 0.5, y: 0.5, z: 0.5 });
+        this.car.position({y: .3});
 
         const wheels = [
             ModelsEngine.getModel('wheel.front.left'),
@@ -76,14 +79,18 @@ export default class FlatGrid extends App {
 
         wheels.forEach(wheel => this.car.add(wheel));
 
+        this.car.addScript('carScript');
+
         this.setUpSmokeEffect();
     }
 
     setUpPlane = () => {
         const plane = ModelsEngine.getModel('plane');
+        plane.setMaterialFromName('lambert');
         //plane.position({ y: -45 });
         //plane.rotation({ x: Math.PI });
-        plane.setColor(0xbbded6);
+        plane.setColor(0xf1f2f6);
+        //plane.setColor(0xbbded6);
         //plane.setColor(0xecf2f9);
         //plane.setTextureMap('level1', { repeat: { x: 1, y: 1 } });
 
@@ -139,7 +146,7 @@ export default class FlatGrid extends App {
     };
 
     onCreate() {
-        //ControlsManager.setOrbitControl();
+        ControlsManager.setOrbitControl();
         SceneManager.setClearColor(0xa8e6cf);
         AudioEngine.setVolume(2);
 

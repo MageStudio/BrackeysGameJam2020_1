@@ -15,7 +15,12 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "wheel.rear.left"
+            "name" : "wheel.rear.left",
+            "translation" : [
+                0,
+                0.4130053222179413,
+                0
+            ]
         }
     ],
     "materials" : [

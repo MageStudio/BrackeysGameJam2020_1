@@ -12,7 +12,12 @@ export default class CarScript extends BaseScript {
         Input.enable();
 
         this.mesh = mesh;
-        this.mesh.setRayColliders([VECTOR_DOWN], { far: 2, near: 0, debug: true });
+        this.mesh.setRayColliders([VECTOR_DOWN], { far: 2, near: 0 });
+
+        this.wheels = {
+            right: this.mesh.getChildByName('wheel.front.right'),
+            left: this.mesh.getChildByName('wheel.front.left'),
+        };
 
         this.FW_ACC = 3;
         this.BW_ACC = 3;
@@ -75,7 +80,12 @@ export default class CarScript extends BaseScript {
         }
 
         if (this.backwards) {
-            this.speed = this.clamp(this.speed - dt * this.BW_ACC, this.maxReverseSpeed, this.maxSpeed);
+            if (this.speed > 0) {
+                // going forward, we're breaking
+                this.speed = this.clamp(this.speed - dt * this.BW_ACC * 4, this.maxReverseSpeed, this.maxSpeed);
+            } else {
+                this.speed = this.clamp(this.speed - dt * this.BW_ACC, this.maxReverseSpeed, this.maxSpeed);
+            }
         }
 
         var dir = 1;
@@ -117,6 +127,9 @@ export default class CarScript extends BaseScript {
         this.mesh.rotation({
             y: this.orientation
         });
+
+        this.wheels.right.rotation({ y: this.rotation });
+        this.wheels.left.rotation({ y: this.rotation });
     }
 
     updateCamera() {
