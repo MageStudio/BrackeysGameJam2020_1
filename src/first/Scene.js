@@ -163,6 +163,10 @@ export default class FlatGrid extends App {
         ScriptManager.create('rotation', Rotation);
 
         const hueSaturationEffect = PostProcessingEngine.get('HueSaturationEffect');
-        PostProcessingEngine.add(hueSaturationEffect, { hue: 0, saturation: 10, renderToScreen: true });
+        const sepiaEffect = PostProcessingEngine.get('SepiaEffect');
+
+        PostProcessingEngine.add(hueSaturationEffect, { hue: 0, saturation: 0.4 });
+        //PostProcessingEngine.add(sepiaEffect, { value: 1.0, renderToScreen: true });
+
     }
 }
