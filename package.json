@@ -22,7 +22,7 @@
     "http": "0.0.0",
     "http-server": "0.11.1",
     "inferno": "7.3.2",
-    "mage-engine": "1.8.4",
+    "mage-engine": "1.10.0",
     "node-prefix": "*",
     "open": "6.0.0",
     "path": "0.12.7",
