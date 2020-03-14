@@ -56,7 +56,7 @@ export default class FlatGrid extends App {
 
     setUpCamera = () => {
         window.camera = SceneManager.camera;
-        SceneManager.camera.position({y: 8, z: 10});
+        SceneManager.camera.position({y: 10, z: 22});
         SceneManager.camera.lookAt(0, 0, 0);
     };
 
@@ -105,13 +105,13 @@ export default class FlatGrid extends App {
         targetBlue.setColor(0xa8e6cf); // c8d9eb
         targetRed.setColor(0xffaaa5);
 
-        const targetBlueGoal = ModelsEngine.getModel('target.blue.goal');
-        const targetRedGoal = ModelsEngine.getModel('target.red.goal');
+        // const targetBlueGoal = ModelsEngine.getModel('target.blue.goal');
+        // const targetRedGoal = ModelsEngine.getModel('target.red.goal');
 
-        targetBlueGoal.setColor(0xa8e6cf);// c8d9eb
-        targetBlueGoal.setOpacity(0.1);
-        targetRedGoal.setColor(0xffaaa5);
-        targetRedGoal.setOpacity(0.1);
+        // targetBlueGoal.setColor(0xa8e6cf);// c8d9eb
+        // targetBlueGoal.setOpacity(0.1);
+        // targetRedGoal.setColor(0xffaaa5);
+        // targetRedGoal.setOpacity(0.1);
     }
 
     setUpSmokeEffect = () => {
@@ -147,7 +147,7 @@ export default class FlatGrid extends App {
     };
 
     onCreate() {
-        ControlsManager.setOrbitControl();
+        //ControlsManager.setOrbitControl();
         SceneManager.setClearColor(0xa8e6cf);
         AudioEngine.setVolume(2);
 
