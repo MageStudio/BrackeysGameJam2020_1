@@ -32,7 +32,7 @@ export default class FlatGrid extends App {
 
     addSunlight() {
         window.sun = new SunLight({
-            color: 0xf9ecec,
+            color: 0x555555,//0xf9ecec,
             intensity: 1,
             position: { x: 10, y: 10, z: 10 },
             target: { x: 0, y: 0, z: 5 },
@@ -163,10 +163,7 @@ export default class FlatGrid extends App {
         ScriptManager.create('rotation', Rotation);
 
         const hueSaturationEffect = PostProcessingEngine.get('HueSaturationEffect');
-        const sepiaEffect = PostProcessingEngine.get('SepiaEffect');
 
-        PostProcessingEngine.add(hueSaturationEffect, { hue: 0, saturation: 0.4 });
-        //PostProcessingEngine.add(sepiaEffect, { value: 1.0, renderToScreen: true });
-
+        PostProcessingEngine.add(hueSaturationEffect, { hue: 0.1, saturation: 0.6 });
     }
 }
