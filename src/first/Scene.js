@@ -15,7 +15,7 @@ import {
     THREEColor
 } from 'mage-engine';
 
-import UIContainer from '../ui/UIContainer';
+import MainMenu from '../ui/MainMenu';
 
 import CarScript from '../carScript';
 import Rotation from '../rotation';
@@ -145,11 +145,6 @@ export default class FlatGrid extends App {
         ParticleEngine.addParticleEmitter(new Fountain(fountainOptions));
     };
 
-    setUp = () => {
-        this.setUpTargets();
-        this.setUpCar();
-    };
-
     onCreate() {
         //ControlsManager.setOrbitControl();
         SceneManager.setClearColor(0xa8e6cf);
@@ -159,9 +154,10 @@ export default class FlatGrid extends App {
         this.addSunlight();
         this.setUpCamera();
         this.setUpPlane();
+        this.setUpTargets();
 
-        this.enableUI(UIContainer, {
-            onOverlayButtonClick: this.setUp
+        this.enableUI(MainMenu, {
+            onStartButtonClick: this.setUpCar
         });
 
         ScriptManager.create('carScript', CarScript);

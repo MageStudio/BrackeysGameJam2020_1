@@ -1,10 +1,10 @@
 {
-  "name": "test",
+  "name": "Holes",
   "version": "0.0.1",
-  "description": "Testing mage engine",
+  "description": "Holes",
   "author": {
-    "name": "<Your Name Here>",
-    "email": "<Your Email Here>"
+    "name": "Marco Stagni",
+    "email": "mrc.stagni@gmail.com"
   },
   "scripts": {
     "dev": "npm run build && npm run start -- 8085",

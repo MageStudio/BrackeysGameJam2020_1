@@ -38,35 +38,27 @@ body {
     color: transparent;
     text-transform: uppercase;
     text-shadow: -5px 5px 0px #ff7f50, 5px -5px 0px #ff6348;
+    margin-bottom: 32px;
 }
 
-button {
-  background: #121212;
-  border: 1px solid #03dac6;
-  border-radius: 4px;
-  height: 40px;
-  width: 96px;
-  color: #03dac6;
-  font-size: 20px;
-  display: inline-block;
-  margin-right: 4px;
+.menu {
+    padding: 0;
+    margin: 0;
 }
 
-button.clear:hover,
-button.clear:active {
-  cursor: pointer;
-  background: #bb86fc;
-  color: #121212;
+.menu li {
+    list-style: none;
+    margin-bottom: 16px;
+    height: 50px;
 }
 
-button.start:hover,
-button.start:active {
-  cursor: pointer;
-  background: #03dac6;
-  color: #121212;
-}
-
-button.clear {
-  border: 1px solid #bb86fc;
-  color: #bb86fc;
+.menu-button {
+    background: transparent;
+    border: 1px solid #d63031;
+    border-radius: 4px;
+    width: 128px;
+    color: #d63031;
+    font-size: 32px;
+    margin: auto;
+    display: block;
 }
