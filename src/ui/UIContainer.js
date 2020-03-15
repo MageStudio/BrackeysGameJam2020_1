@@ -18,7 +18,7 @@ export default class UIContainer extends Component {
         });
 
         onOverlayButtonClick();
-    }
+    };
 
     render() {
         const { overlayVisible } = this.state;
@@ -26,6 +26,7 @@ export default class UIContainer extends Component {
 
         return (
             <div className={classname}>
+                <h1 className={'gametitle'}>The Wrong Hole</h1>
                 <button onClick={this.onOverlayButtonClick}>
                     START
                 </button>

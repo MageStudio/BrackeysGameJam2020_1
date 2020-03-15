@@ -33,8 +33,8 @@ export default class FlatGrid extends App {
     addSunlight() {
         window.sun = new SunLight({
             color: 0x555555,//0xf9ecec,
-            intensity: 1,
-            position: { x: 10, y: 10, z: 10 },
+            intensity: 3,
+            position: { x: 10, y: 4, z: 2 },
             target: { x: 0, y: 0, z: 5 },
             name: 'sunlight',
             near: 0.1,
@@ -90,7 +90,12 @@ export default class FlatGrid extends App {
         plane.setMaterialFromName('lambert');
         //plane.position({ y: -45 });
         //plane.rotation({ x: Math.PI });
-        plane.setColor(0xf1f2f6);
+
+        plane.setColor(0xfab1a0);
+        //plane.setColor(0xc8d9eb); YES
+        // plane.setColor(0xf1f2f6);
+
+
         //plane.setColor(0xbbded6);
         //plane.setColor(0xecf2f9);
         //plane.setTextureMap('level1', { repeat: { x: 1, y: 1 } });
@@ -141,7 +146,6 @@ export default class FlatGrid extends App {
     };
 
     setUp = () => {
-        this.setUpPlane();
         this.setUpTargets();
         this.setUpCar();
     };
@@ -154,6 +158,7 @@ export default class FlatGrid extends App {
         this.addAmbientLight();
         this.addSunlight();
         this.setUpCamera();
+        this.setUpPlane();
 
         this.enableUI(UIContainer, {
             onOverlayButtonClick: this.setUp

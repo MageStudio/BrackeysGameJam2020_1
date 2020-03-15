@@ -22,14 +22,22 @@ body {
 }
 
 * {
-  font-family: Staatliches, sans-serif;
+  font-family: Anton, sans-serif;
 }
 
 .overlay {
     height: 100vh;
     width: 100vw;
     position: absolute;
-    background: black;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.gametitle {
+    font-size: 128px;
+    text-align: center;
+    color: transparent;
+    text-transform: uppercase;
+    text-shadow: -5px 5px 0px #ff7f50, 5px -5px 0px #ff6348;
 }
 
 button {
