@@ -26,24 +26,26 @@ export default class MainMenu extends Component {
 
         return (
             <div className={classname}>
-                <h1 className={'gametitle'}>The Wrong Hole</h1>
-                <ul className='menu'>
-                    <li>
-                        <button className='menu-button' onClick={this.onStartButtonClick}>
-                            START
-                        </button>
-                    </li>
-                    <li>
-                        <button className='menu-button' onClick={this.onResumeButtonClick}>
-                            RESUME
-                        </button>
-                    </li>
-                    <li>
-                        <button className='menu-button' onClick={this.onAboutButtonClick}>
-                            ABOUT
-                        </button>
-                    </li>
-                </ul>
+                <div className='menucontainer'>
+                    <h1 className={'gametitle'}>The Wrong Hole</h1>
+                    <ul className='menu'>
+                        <li>
+                            <button className='menu-button' onClick={this.onStartButtonClick}>
+                                START
+                            </button>
+                        </li>
+                        <li>
+                            <button className='menu-button' onClick={this.onResumeButtonClick}>
+                                RESUME
+                            </button>
+                        </li>
+                        <li>
+                            <button className='menu-button' onClick={this.onAboutButtonClick}>
+                                ABOUT
+                            </button>
+                        </li>
+                    </ul>
+                </div>
             </div>
         )
     }

@@ -32,6 +32,12 @@ body {
     background: rgba(255, 255, 255, 0.6);
 }
 
+.menucontainer {
+    display: block;
+    width: 600px;
+    margin: auto;
+}
+
 .gametitle {
     font-size: 128px;
     text-align: center;
@@ -63,10 +69,13 @@ body {
 }
 
 .menu-button {
+    background: transparent;
     width: 128px;
-    color: 2d3436;
+    color: #e17055;
     font-size: 32px;
     margin: auto;
     display: block;
     border: none;
+    text-align: left;
+    border-radius: 4px;
 }
