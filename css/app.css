@@ -35,10 +35,20 @@ body {
 .gametitle {
     font-size: 128px;
     text-align: center;
-    color: transparent;
+    color: #e17055;
     text-transform: uppercase;
-    text-shadow: -5px 5px 0px #ff7f50, 5px -5px 0px #ff6348;
+    /* text-shadow: -5px 5px 0px #ff7f50, 5px -5px 0px #ff6348; */
     margin-bottom: 32px;
+    /* text-shadow: 1px 0px #e17055, -1px 0px #e17055, 0px 1px #e17055, 0px -1px #e17055; */
+    /* text-align: left; */
+    /* font-family: monospace; */
+}
+
+.gametitle::before {
+    content: 'Games nobody asked for:';
+    color: #2d3436;
+    font-size: 28px;
+    position: absolute;
 }
 
 .menu {
@@ -53,12 +63,10 @@ body {
 }
 
 .menu-button {
-    background: transparent;
-    border: 1px solid #d63031;
-    border-radius: 4px;
     width: 128px;
-    color: #d63031;
+    color: 2d3436;
     font-size: 32px;
     margin: auto;
     display: block;
+    border: none;
 }
