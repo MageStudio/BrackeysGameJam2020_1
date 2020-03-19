@@ -23,14 +23,14 @@ import Rotation from '../rotation';
 const BACKGROUND_COLOR = 0xa8e6cf;
 const PLANE_COLOR = 0xfab1a0;
 const CAR_COLOR = 0xa8e6cf;
-const SUN_COLOR = 0x555555;
+const SUN_COLOR = 0xe17055;//0x555555;
 const AMBIENT_LIGHT_COLOR = 0xffffff;
 
 export default class FlatGrid extends App {
 
     addAmbientLight() {
         window.ambient = new AmbientLight({
-            color: AMBIENT_LIGHT_COLOR,
+            color: BACKGROUND_COLOR,
             intensity: 0.1,
             name: 'ambientlight'
         });
@@ -39,7 +39,7 @@ export default class FlatGrid extends App {
     addSunlight() {
         window.sun = new SunLight({
             color: SUN_COLOR,
-            intensity: 3,
+            intensity: 1,
             position: { x: 10, y: 4, z: 2 },
             target: { x: 0, y: 0, z: 5 },
             name: 'sunlight',
@@ -57,7 +57,7 @@ export default class FlatGrid extends App {
         setTimeout(() => {
             loader.classList.add('invisible');
         }, 6000);
-        callback();
+        //callback();
     };
 
     setUpCamera = () => {
@@ -170,7 +170,7 @@ export default class FlatGrid extends App {
         this.setUpCamera();
         this.setUpPlane();
         this.setUpGround();
-        this.setUpBack();
+        //this.setUpBack();
         this.setUpTargets();
 
         this.enableUI(MainMenu, {
