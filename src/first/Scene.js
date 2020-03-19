@@ -20,11 +20,17 @@ import MainMenu from '../ui/MainMenu';
 import CarScript from '../carScript';
 import Rotation from '../rotation';
 
+const BACKGROUND_COLOR = 0xa8e6cf;
+const PLANE_COLOR = 0xfab1a0;
+const CAR_COLOR = 0xa8e6cf;
+const SUN_COLOR = 0x555555;
+const AMBIENT_LIGHT_COLOR = 0xffffff;
+
 export default class FlatGrid extends App {
 
     addAmbientLight() {
         window.ambient = new AmbientLight({
-            color: 0xffffff,
+            color: AMBIENT_LIGHT_COLOR,
             intensity: 0.1,
             name: 'ambientlight'
         });
@@ -32,7 +38,7 @@ export default class FlatGrid extends App {
 
     addSunlight() {
         window.sun = new SunLight({
-            color: 0x555555,//0xf9ecec,
+            color: SUN_COLOR,
             intensity: 3,
             position: { x: 10, y: 4, z: 2 },
             target: { x: 0, y: 0, z: 5 },
@@ -63,13 +69,13 @@ export default class FlatGrid extends App {
     setUpCar = () => {
         this.car = ModelsEngine.getModel('buggy.blue');
         window.car = this.car;
-        this.car.setColor(0xa8e6cf);
+        this.car.setColor(CAR_COLOR);
         this.car.addSound('engine', { loop: true, autoplay: false });
         this.car.sound.setVolume(2);
         this.car.sound.start();
         this.car.setMaterialFromName('lambert');
-        this.car.scale({x : 0.5, y: 0.5, z: 0.5 });
-        this.car.position({y: .3});
+        this.car.scale({ x : 0.5, y: 0.5, z: 0.5 });
+        this.car.position({ y: .3 });
 
         const wheels = [
             ModelsEngine.getModel('wheel.front.left'),
@@ -88,20 +94,28 @@ export default class FlatGrid extends App {
     setUpPlane = () => {
         const plane = ModelsEngine.getModel('plane');
         plane.setMaterialFromName('lambert');
-        //plane.position({ y: -45 });
-        //plane.rotation({ x: Math.PI });
-
-        plane.setColor(0xfab1a0);
-        //plane.setColor(0xc8d9eb); YES
-        // plane.setColor(0xf1f2f6);
-
-
-        //plane.setColor(0xbbded6);
-        //plane.setColor(0xecf2f9);
-        //plane.setTextureMap('level1', { repeat: { x: 1, y: 1 } });
-
-        window.plane = plane;
+        plane.setColor(PLANE_COLOR);
     };
+
+    setUpGround = () => {
+        const ground = this.sceneHelper.addCube(1, BACKGROUND_COLOR);
+        ground.setMaterialFromName('lambert');
+        ground.position({y: -2.5});
+        ground.scale({x: 500, z: 200, y: 0.5});
+        ground.setColor(BACKGROUND_COLOR);
+
+        window.ground = ground;
+    }
+
+    setUpBack = () => {
+        const back = this.sceneHelper.addCube(1, BACKGROUND_COLOR);
+        back.setMaterialFromName('lambert');
+        back.position({ z: 200 });
+        back.scale({x: 500, y: 200});
+        back.setColor(BACKGROUND_COLOR);
+
+        window.back = back;
+    }
 
     setUpTargets = () => {
         const targetBlue = ModelsEngine.getModel('target.blue');
@@ -147,13 +161,16 @@ export default class FlatGrid extends App {
 
     onCreate() {
         //ControlsManager.setOrbitControl();
-        SceneManager.setClearColor(0xa8e6cf);
+        SceneManager.setShadowType('basic');
+        SceneManager.setClearColor(BACKGROUND_COLOR);
         AudioEngine.setVolume(2);
 
         this.addAmbientLight();
         this.addSunlight();
         this.setUpCamera();
         this.setUpPlane();
+        this.setUpGround();
+        this.setUpBack();
         this.setUpTargets();
 
         this.enableUI(MainMenu, {

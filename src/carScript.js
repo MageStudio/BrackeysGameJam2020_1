@@ -12,7 +12,7 @@ export default class CarScript extends BaseScript {
         Input.enable();
 
         this.mesh = mesh;
-        this.mesh.setRayColliders([VECTOR_DOWN], { far: 2, near: 0 });
+        this.mesh.setColliders([VECTOR_DOWN], { far: 1, near: 0 });
 
         this.wheels = {
             right: this.mesh.getChildByName('wheel.front.right'),
@@ -68,6 +68,7 @@ export default class CarScript extends BaseScript {
     updateYSpeed(dt) {
         this.speed_y -= this.gravity * this.mass * dt;
         const { meshes } = this.mesh.isCollidingOnDirection(DOWN);
+        console.log(meshes);
         if (meshes.length > 0) {
             this.speed_y = Math.max(0, this.speed_y);
         }
