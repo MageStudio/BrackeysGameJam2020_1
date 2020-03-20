@@ -1,23 +1,23 @@
 body {
-  background-color: #222;
+  background-color: #e17055;
 }
 
 .bar {
-    background: #121212;
+    background: #e17055;
 }
 
 .loader {
-    background-color: #121212;
+    background-color: #e17055;
 }
 
 .loader-box {
-    background: #121212;
-    border: 1px solid #03dac6;
-    color: #03dac6;
+    background: transparent;
+    border: 1px solid #fdcb6e;
+    color: #fdcb6e;
 }
 
 .progress {
-    background: #03dac6;
+    background: #fdcb6e;
     color: #fff;
 }
 

@@ -68,7 +68,7 @@ export default class CarScript extends BaseScript {
     updateYSpeed(dt) {
         this.speed_y -= this.gravity * this.mass * dt;
         const { meshes } = this.mesh.isCollidingOnDirection(DOWN);
-        console.log(meshes);
+
         if (meshes.length > 0) {
             this.speed_y = Math.max(0, this.speed_y);
         }

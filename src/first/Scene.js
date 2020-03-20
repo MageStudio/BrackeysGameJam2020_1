@@ -20,7 +20,7 @@ import MainMenu from '../ui/MainMenu';
 import CarScript from '../carScript';
 import Rotation from '../rotation';
 
-const BACKGROUND_COLOR = 0xa8e6cf;
+const BACKGROUND_COLOR = 0x81ecec;//0x55efc4;//0xa8e6cf;
 const PLANE_COLOR = 0xfab1a0;
 const CAR_COLOR = 0xa8e6cf;
 const SUN_COLOR = 0xe17055;//0x555555;
@@ -39,7 +39,7 @@ export default class FlatGrid extends App {
     addSunlight() {
         window.sun = new SunLight({
             color: SUN_COLOR,
-            intensity: 1,
+            intensity: 2,
             position: { x: 10, y: 4, z: 2 },
             target: { x: 0, y: 0, z: 5 },
             name: 'sunlight',
@@ -57,7 +57,7 @@ export default class FlatGrid extends App {
         setTimeout(() => {
             loader.classList.add('invisible');
         }, 6000);
-        //callback();
+        callback();
     };
 
     setUpCamera = () => {
@@ -100,7 +100,7 @@ export default class FlatGrid extends App {
     setUpGround = () => {
         const ground = this.sceneHelper.addCube(1, BACKGROUND_COLOR);
         ground.setMaterialFromName('lambert');
-        ground.position({y: -2.5});
+        ground.position({y: -1.5});
         ground.scale({x: 500, z: 200, y: 0.5});
         ground.setColor(BACKGROUND_COLOR);
 
