@@ -40,7 +40,7 @@ export default class FlatGrid extends App {
         window.sun = new SunLight({
             color: SUN_COLOR,
             intensity: 2,
-            position: { x: 10, y: 4, z: 2 },
+            position: { x: 20, y: 8, z: 0 },
             target: { x: 0, y: 0, z: 5 },
             name: 'sunlight',
             near: 0.1,
@@ -62,7 +62,7 @@ export default class FlatGrid extends App {
 
     setUpCamera = () => {
         window.camera = SceneManager.camera;
-        SceneManager.camera.position({y: 10, z: 22});
+        SceneManager.camera.position({x: 5, y: 10, z: 16});
         SceneManager.camera.lookAt(0, 0, 0);
     };
 
@@ -100,7 +100,7 @@ export default class FlatGrid extends App {
     setUpGround = () => {
         const ground = this.sceneHelper.addCube(1, BACKGROUND_COLOR);
         ground.setMaterialFromName('lambert');
-        ground.position({y: -1.5});
+        ground.position({y: -4});
         ground.scale({x: 500, z: 200, y: 0.5});
         ground.setColor(BACKGROUND_COLOR);
 
@@ -133,6 +133,14 @@ export default class FlatGrid extends App {
         // targetRedGoal.setOpacity(0.1);
     }
 
+    setUpEnv = () => {
+        const pc = {
+            case: ModelsEngine.getModel('pc.case'),
+            keyboard: ModelsEngine.getModel('pc.keyboard'),
+            monitor: ModelsEngine.getModel('pc.monitor')
+        };
+    }
+
     setUpSmokeEffect = () => {
         const Fountain = ParticleEngine.get('Fountain');
 
@@ -160,7 +168,7 @@ export default class FlatGrid extends App {
     };
 
     onCreate() {
-        //ControlsManager.setOrbitControl();
+        ControlsManager.setOrbitControl();
         SceneManager.setShadowType('basic');
         SceneManager.setClearColor(BACKGROUND_COLOR);
         AudioEngine.setVolume(2);
@@ -171,6 +179,7 @@ export default class FlatGrid extends App {
         this.setUpPlane();
         this.setUpGround();
         //this.setUpBack();
+        this.setUpEnv();
         this.setUpTargets();
 
         this.enableUI(MainMenu, {

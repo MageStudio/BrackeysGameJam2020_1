@@ -33,6 +33,10 @@ const assets = {
         'wheel.front.left': 'assets/models/wheel.front.left.gltf',
         'wheel.front.right': 'assets/models/wheel.front.right.gltf',
 
+        'pc.case': 'assets/models/pc.case.gltf',
+        'pc.keyboard': 'assets/models/pc.keyboard.gltf',
+        'pc.monitor': 'assets/models/pc.monitor.gltf',
+
 
         'level_1': 'assets/models/plane.level.1.glb',
         'car': 'assets/models/car.glb'
