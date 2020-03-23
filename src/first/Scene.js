@@ -41,7 +41,7 @@ export default class FlatGrid extends App {
             color: SUN_COLOR,
             intensity: 2,
             position: { x: 20, y: 8, z: 0 },
-            target: { x: 0, y: 0, z: 5 },
+            target: { x: 0, y: 0, z: 0 },
             name: 'sunlight',
             near: 0.1,
             far: 50
@@ -62,7 +62,7 @@ export default class FlatGrid extends App {
 
     setUpCamera = () => {
         window.camera = SceneManager.camera;
-        SceneManager.camera.position({x: 5, y: 10, z: 16});
+        SceneManager.camera.position({ y: 10, z: 16 });
         SceneManager.camera.lookAt(0, 0, 0);
     };
 
@@ -102,7 +102,7 @@ export default class FlatGrid extends App {
         ground.setMaterialFromName('lambert');
         ground.position({y: -4});
         ground.scale({x: 500, z: 200, y: 0.5});
-        ground.setColor(BACKGROUND_COLOR);
+        ground.setColor(0x74b9ff);
 
         window.ground = ground;
     }
@@ -124,6 +124,9 @@ export default class FlatGrid extends App {
         targetBlue.setColor(0xa8e6cf); // c8d9eb
         targetRed.setColor(0xffaaa5);
 
+        targetBlue.setMaterialFromName('lambert');
+        targetRed.setMaterialFromName('lambert');
+
         // const targetBlueGoal = ModelsEngine.getModel('target.blue.goal');
         // const targetRedGoal = ModelsEngine.getModel('target.red.goal');
 
@@ -139,6 +142,10 @@ export default class FlatGrid extends App {
             keyboard: ModelsEngine.getModel('pc.keyboard'),
             monitor: ModelsEngine.getModel('pc.monitor')
         };
+
+        pc.case.setMaterialFromName('lambert');
+        pc.keyboard.setMaterialFromName('lambert');
+        pc.monitor.setMaterialFromName('lambert');
     }
 
     setUpSmokeEffect = () => {
@@ -191,6 +198,6 @@ export default class FlatGrid extends App {
 
         const hueSaturationEffect = PostProcessingEngine.get('HueSaturationEffect');
 
-        PostProcessingEngine.add(hueSaturationEffect, { hue: 0.1, saturation: 0.6 });
+        PostProcessingEngine.add(hueSaturationEffect, { hue: 0.1, saturation: 0.3 });
     }
 }
