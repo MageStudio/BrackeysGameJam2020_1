@@ -22,6 +22,7 @@ import CarScript from '../carScript';
 import Rotation from '../rotation';
 
 const BACKGROUND_COLOR = 0x81ecec;//0x55efc4;//0xa8e6cf;
+const GROUND_COLOR = 0xdddddd;
 const PLANE_COLOR = 0xfab1a0;
 const CAR_COLOR = 0xa8e6cf;
 const SUN_COLOR = 0xe17055;//0x555555;
@@ -32,7 +33,7 @@ export default class FlatGrid extends BaseScene {
 
     addAmbientLight() {
         window.ambient = new AmbientLight({
-            color: PLANE_COLOR,
+            color: WHITE,
             intensity: 0.1,
             name: 'ambientlight'
         });
@@ -40,8 +41,8 @@ export default class FlatGrid extends BaseScene {
 
     addSunlight() {
         window.sun = new SunLight({
-            color: WHITE,//PLANE_COLOR,//SUN_COLOR,
-            intensity: 0.1,
+            color: PLANE_COLOR,//PLANE_COLOR,//SUN_COLOR,
+            intensity: 0.3,
             position: { x: 20, y: 8, z: 0 },
             target: { x: 0, y: 0, z: 0 },
             name: 'sunlight',
@@ -64,7 +65,7 @@ export default class FlatGrid extends BaseScene {
 
     setUpCamera = () => {
         window.camera = SceneManager.camera;
-        SceneManager.camera.position({ y: 17, z: 13 });
+        SceneManager.camera.position({ y: 15, z: 13 });
         SceneManager.camera.lookAt(0, 0, 0);
     };
 
@@ -96,28 +97,19 @@ export default class FlatGrid extends BaseScene {
     setUpPlane = () => {
         const plane = ModelsEngine.getModel('plane');
         plane.setMaterialFromName('lambert');
-        plane.setColor(WHITE);
+        plane.setColor(GROUND_COLOR);
+
+        window.plane = plane;
     };
 
     setUpGround = () => {
-        const ground = this.sceneHelper.addCube(1, BACKGROUND_COLOR);
+        const ground = this.sceneHelper.addCube(1, PLANE_COLOR);
         ground.setMaterialFromName('lambert');
         ground.position({ y: -4 });
         ground.scale({x: 500, z: 200, y: 0.5});
-        ground.setColor(WHITE);
-        //ground.setColor(0x74b9ff);
+        ground.setColor(PLANE_COLOR);
 
         window.ground = ground;
-    }
-
-    setUpBack = () => {
-        const back = this.sceneHelper.addCube(1, BACKGROUND_COLOR);
-        back.setMaterialFromName('lambert');
-        back.position({ z: 200 });
-        back.scale({x: 500, y: 200});
-        back.setColor(BACKGROUND_COLOR);
-
-        window.back = back;
     }
 
     setUpTargets = () => {
@@ -176,7 +168,7 @@ export default class FlatGrid extends BaseScene {
     onCreate() {
         // ControlsManager.setOrbitControl();
         SceneManager.setShadowType('basic');
-        SceneManager.setClearColor(BACKGROUND_COLOR);
+        SceneManager.setClearColor(PLANE_COLOR);
         AudioEngine.setVolume(2);
 
         this.addAmbientLight();
