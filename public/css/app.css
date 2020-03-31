@@ -43,8 +43,10 @@ body {
     width: 900px;
     height: 500px;
     margin: auto;
-    border: 5px solid #e17055;
+    border: 2px solid #e17055;
     border-radius: 8px;
+
+    padding-bottom: 32px;
 }
 
 .gametitle {
@@ -52,11 +54,7 @@ body {
     text-align: center;
     color: #e17055;
     text-transform: uppercase;
-    /* text-shadow: -5px 5px 0px #ff7f50, 5px -5px 0px #ff6348; */
     margin-bottom: 32px;
-    /* text-shadow: 1px 0px #e17055, -1px 0px #e17055, 0px 1px #e17055, 0px -1px #e17055; */
-    /* text-align: left; */
-    /* font-family: monospace; */
 }
 
 .gametitle::before {
@@ -85,6 +83,13 @@ body {
     margin: auto;
     display: block;
     border: none;
-    text-align: left;
     border-radius: 4px;
+}
+
+.menu-button:hover,
+.menu-button:active {
+    cursor: pointer;
+    border: none;
+    border-radius: 0px;
+    border-bottom: 2px solid #e17055;
 }

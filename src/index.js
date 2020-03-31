@@ -1,5 +1,8 @@
-import { Router } from 'mage-engine';
+import { Router, store } from 'mage-engine';
 import Scene from './first/Scene';
+import reducers from './ui/reducers';
+
+store.createStore(reducers, {}, true);
 
 const assets = {
     Audio: {

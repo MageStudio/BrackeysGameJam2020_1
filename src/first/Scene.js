@@ -1,5 +1,5 @@
 import {
-    App,
+    BaseScene,
     ControlsManager,
     SceneManager,
     AmbientLight,
@@ -12,7 +12,8 @@ import {
     ImagesEngine,
     PostProcessingEngine,
     Vector3,
-    THREEColor
+    THREEColor,
+    store
 } from 'mage-engine';
 
 import MainMenu from '../ui/MainMenu';
@@ -25,12 +26,13 @@ const PLANE_COLOR = 0xfab1a0;
 const CAR_COLOR = 0xa8e6cf;
 const SUN_COLOR = 0xe17055;//0x555555;
 const AMBIENT_LIGHT_COLOR = 0xffffff;
+const WHITE = 0Xffffff;
 
-export default class FlatGrid extends App {
+export default class FlatGrid extends BaseScene {
 
     addAmbientLight() {
         window.ambient = new AmbientLight({
-            color: BACKGROUND_COLOR,
+            color: PLANE_COLOR,
             intensity: 0.1,
             name: 'ambientlight'
         });
@@ -38,8 +40,8 @@ export default class FlatGrid extends App {
 
     addSunlight() {
         window.sun = new SunLight({
-            color: SUN_COLOR,
-            intensity: 2,
+            color: WHITE,//PLANE_COLOR,//SUN_COLOR,
+            intensity: 0.1,
             position: { x: 20, y: 8, z: 0 },
             target: { x: 0, y: 0, z: 0 },
             name: 'sunlight',
@@ -62,14 +64,14 @@ export default class FlatGrid extends App {
 
     setUpCamera = () => {
         window.camera = SceneManager.camera;
-        SceneManager.camera.position({ y: 10, z: 16 });
+        SceneManager.camera.position({ y: 17, z: 13 });
         SceneManager.camera.lookAt(0, 0, 0);
     };
 
     setUpCar = () => {
         this.car = ModelsEngine.getModel('buggy.blue');
         window.car = this.car;
-        this.car.setColor(CAR_COLOR);
+        //this.car.setColor(CAR_COLOR);
         this.car.addSound('engine', { loop: true, autoplay: false });
         this.car.sound.setVolume(2);
         this.car.sound.start();
@@ -94,15 +96,16 @@ export default class FlatGrid extends App {
     setUpPlane = () => {
         const plane = ModelsEngine.getModel('plane');
         plane.setMaterialFromName('lambert');
-        plane.setColor(PLANE_COLOR);
+        plane.setColor(WHITE);
     };
 
     setUpGround = () => {
         const ground = this.sceneHelper.addCube(1, BACKGROUND_COLOR);
         ground.setMaterialFromName('lambert');
-        ground.position({y: -4});
+        ground.position({ y: -4 });
         ground.scale({x: 500, z: 200, y: 0.5});
-        ground.setColor(0x74b9ff);
+        ground.setColor(WHITE);
+        //ground.setColor(0x74b9ff);
 
         window.ground = ground;
     }
@@ -126,14 +129,6 @@ export default class FlatGrid extends App {
 
         targetBlue.setMaterialFromName('lambert');
         targetRed.setMaterialFromName('lambert');
-
-        // const targetBlueGoal = ModelsEngine.getModel('target.blue.goal');
-        // const targetRedGoal = ModelsEngine.getModel('target.red.goal');
-
-        // targetBlueGoal.setColor(0xa8e6cf);// c8d9eb
-        // targetBlueGoal.setOpacity(0.1);
-        // targetRedGoal.setColor(0xffaaa5);
-        // targetRedGoal.setOpacity(0.1);
     }
 
     setUpEnv = () => {
@@ -174,8 +169,12 @@ export default class FlatGrid extends App {
         ParticleEngine.addParticleEmitter(new Fountain(fountainOptions));
     };
 
+    onStateChange = (state) => {
+        console.log(state);
+    }
+
     onCreate() {
-        ControlsManager.setOrbitControl();
+        // ControlsManager.setOrbitControl();
         SceneManager.setShadowType('basic');
         SceneManager.setClearColor(BACKGROUND_COLOR);
         AudioEngine.setVolume(2);

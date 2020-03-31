@@ -1,6 +1,7 @@
 import { Component } from 'inferno';
+import { connect } from 'mage-engine';
 
-export default class MainMenu extends Component {
+class MainMenu extends Component {
 
     constructor(props) {
         super(props);
@@ -50,3 +51,11 @@ export default class MainMenu extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    console.log(state);
+
+    return {};
+}
+
+export default connect(mapStateToProps, null)(MainMenu);
