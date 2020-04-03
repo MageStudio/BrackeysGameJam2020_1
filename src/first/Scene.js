@@ -13,8 +13,11 @@ import {
     PostProcessingEngine,
     Vector3,
     THREEColor,
+    Universe,
     store
 } from 'mage-engine';
+
+window.universe = Universe;
 
 import MainMenu from '../ui/MainMenu';
 
@@ -116,6 +119,10 @@ export default class FlatGrid extends BaseScene {
         const targetBlue = ModelsEngine.getModel('target.blue');
         const targetRed = ModelsEngine.getModel('target.red');
 
+        const targetBlueGoal = ModelsEngine.getModel('target.blue.goal');
+        const targetRedGoal = ModelsEngine.getModel('target.red.goal');
+
+
         targetBlue.setColor(0xa8e6cf); // c8d9eb
         targetRed.setColor(0xffaaa5);
 
@@ -169,7 +176,7 @@ export default class FlatGrid extends BaseScene {
         // ControlsManager.setOrbitControl();
         SceneManager.setShadowType('basic');
         SceneManager.setClearColor(PLANE_COLOR);
-        AudioEngine.setVolume(2);
+        AudioEngine.setVolume(0.1); // 2
 
         this.addAmbientLight();
         this.addSunlight();

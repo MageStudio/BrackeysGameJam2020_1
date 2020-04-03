@@ -1,6 +1,6 @@
 import { BaseScript, Input, constants, SceneManager } from 'mage-engine';
 
-const { VECTOR_DOWN, DOWN } = constants;
+const { VECTOR_DOWN, VECTOR_FRONT, FRONT, DOWN } = constants;
 
 export default class CarScript extends BaseScript {
 
@@ -12,7 +12,10 @@ export default class CarScript extends BaseScript {
         Input.enable();
 
         this.mesh = mesh;
-        this.mesh.setColliders([VECTOR_DOWN], { far: 1, near: 0 });
+        this.mesh.setColliders(
+            [VECTOR_DOWN, VECTOR_FRONT],
+            [{ far: 1, near: 0 }, { far: 2, near: 0}]
+        );
 
         this.wheels = {
             right: this.mesh.getChildByName('wheel.front.right'),
@@ -39,9 +42,7 @@ export default class CarScript extends BaseScript {
         this.orientation = 0;
     }
 
-    percentage(value, max) {
-        return Math.abs(value) * 100 / max;
-    }
+    percentage(value, max) { return Math.abs(value) * 100 / max; }
     exponentialEaseOut(k) { return k === 1 ? 10 : - Math.pow(2, - 2 * k) + 5; }
     clamp(value, min, max) { return Math.min(Math.max(value, min), max); }
 
@@ -67,9 +68,9 @@ export default class CarScript extends BaseScript {
 
     updateYSpeed(dt) {
         this.speed_y -= this.gravity * this.mass * dt;
-        const { meshes } = this.mesh.isCollidingOnDirection(DOWN);
+        const { collisions } = this.mesh.isCollidingOnDirection(DOWN);
 
-        if (meshes.length > 0) {
+        if (collisions.length > 0) {
             this.speed_y = Math.max(0, this.speed_y);
         }
     }
@@ -138,8 +139,17 @@ export default class CarScript extends BaseScript {
         SceneManager.camera.lookAt(x, y, z);
     }
 
+    checkFrontCollisions() {
+        const { collisions } = this.mesh.isCollidingOnDirection(FRONT);
+        //this.colliding = collisions.length > 0;
+        if (collisions.length) {
+            console.log(collisions);
+        }
+    }
+
     update(dt) {
         this.updateInput();
+        this.checkFrontCollisions();
         this.updatePosition(dt);
         this.updateSound();
         this.updateCamera();
