@@ -1,4 +1,10 @@
-import { BaseScript, Input, constants, SceneManager } from 'mage-engine';
+import {
+    BaseScript,
+    Input,
+    constants,
+    SceneManager,
+    Universe
+} from 'mage-engine';
 
 const { VECTOR_DOWN, VECTOR_FRONT, FRONT, DOWN } = constants;
 
@@ -14,7 +20,7 @@ export default class CarScript extends BaseScript {
         this.mesh = mesh;
         this.mesh.setColliders(
             [VECTOR_DOWN, VECTOR_FRONT],
-            [{ far: 1, near: 0 }, { far: 2, near: 0}]
+            [{ far: 1, near: 0 }, { far: 5, near: 0}]
         );
 
         this.wheels = {
@@ -141,9 +147,13 @@ export default class CarScript extends BaseScript {
 
     checkFrontCollisions() {
         const { collisions } = this.mesh.isCollidingOnDirection(FRONT);
-        //this.colliding = collisions.length > 0;
         if (collisions.length) {
-            console.log(collisions);
+            const { uuid }  = collisions[0];
+            const mesh = Universe.getByUUID(uuid);
+
+            if (mesh.name === 'target.blue') {
+                console.log('win');
+            }
         }
     }
 
