@@ -75,7 +75,7 @@ export default class FlatGrid extends BaseScene {
     setUpCar = () => {
         this.car = ModelsEngine.getModel('buggy.blue');
         window.car = this.car;
-        //this.car.setColor(CAR_COLOR);
+
         this.car.addSound('engine', { loop: true, autoplay: false });
         this.car.sound.setVolume(2);
         this.car.sound.start();
@@ -83,15 +83,12 @@ export default class FlatGrid extends BaseScene {
         this.car.scale({ x : 0.5, y: 0.5, z: 0.5 });
         this.car.position({ y: .3 });
 
-        const wheels = [
+        this.car.add([
             ModelsEngine.getModel('wheel.front.left'),
             ModelsEngine.getModel('wheel.front.right'),
             ModelsEngine.getModel('wheel.rear.left'),
             ModelsEngine.getModel('wheel.rear.right')
-        ];
-
-        wheels.forEach(wheel => this.car.add(wheel));
-
+        ]);
         this.car.addScript('carScript');
 
         // this.setUpSmokeEffect();
