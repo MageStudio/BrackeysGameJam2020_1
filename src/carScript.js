@@ -148,8 +148,7 @@ export default class CarScript extends BaseScript {
     checkFrontCollisions() {
         const { collisions } = this.mesh.isCollidingOnDirection(FRONT);
         if (collisions.length) {
-            const { uuid }  = collisions[0];
-            const mesh = Universe.getByUUID(uuid);
+            const { mesh }  = collisions[0];
 
             if (mesh.name === 'target.blue') {
                 console.log('win');
