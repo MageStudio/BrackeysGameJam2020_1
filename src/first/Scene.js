@@ -191,8 +191,8 @@ export default class FlatGrid extends BaseScene {
         ScriptManager.create('carScript', CarScript);
         ScriptManager.create('rotation', Rotation);
 
-        const hueSaturationEffect = PostProcessingEngine.get('HueSaturationEffect');
 
-        PostProcessingEngine.add(hueSaturationEffect, { hue: 0.1, saturation: 0.3 });
+        PostProcessingEngine.add('HueSaturationEffect', { hue: 0.1, saturation: 0.3 });
+        PostProcessingEngine.add('DepthOfField', { aperture: 5, focus: 500 });
     }
 }
