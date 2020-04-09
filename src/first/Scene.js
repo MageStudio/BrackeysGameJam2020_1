@@ -193,6 +193,6 @@ export default class FlatGrid extends BaseScene {
 
 
         PostProcessingEngine.add('HueSaturationEffect', { hue: 0.1, saturation: 0.3 });
-        PostProcessingEngine.add('DepthOfField', { aperture: 5, focus: 500 });
+        PostProcessingEngine.add('DepthOfField2');
     }
 }
