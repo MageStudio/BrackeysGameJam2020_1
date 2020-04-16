@@ -170,7 +170,7 @@ export default class FlatGrid extends BaseScene {
     }
 
     onCreate() {
-        // ControlsManager.setOrbitControl();
+        //ControlsManager.setOrbitControl();
         SceneManager.setShadowType('basic');
         SceneManager.setClearColor(PLANE_COLOR);
         AudioEngine.setVolume(0.1); // 2
@@ -191,8 +191,7 @@ export default class FlatGrid extends BaseScene {
         ScriptManager.create('carScript', CarScript);
         ScriptManager.create('rotation', Rotation);
 
-
         PostProcessingEngine.add('HueSaturationEffect', { hue: 0.1, saturation: 0.3 });
-        PostProcessingEngine.add('DepthOfField2');
+        PostProcessingEngine.add('DepthOfField', { focus: 19.85, aperture: 0.0001, maxblur: 0.008 });
     }
 }
