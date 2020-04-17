@@ -63,7 +63,8 @@ const config = {
     },
 
     physics: {
-        enabled: false
+        enabled: true,
+        path: 'http://localhost:8085/js/mage.physics.js'
     },
 
     tween: {

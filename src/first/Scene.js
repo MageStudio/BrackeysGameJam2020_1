@@ -89,7 +89,8 @@ export default class FlatGrid extends BaseScene {
             ModelsEngine.getModel('wheel.rear.left'),
             ModelsEngine.getModel('wheel.rear.right')
         ]);
-        this.car.addScript('carScript');
+
+        //this.car.addScript('carScript');
 
         // this.setUpSmokeEffect();
     }

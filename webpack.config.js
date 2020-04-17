@@ -40,6 +40,7 @@ module.exports = {
             { from: './index.html', to: './index.html' },
             { from: 'assets', to: 'assets' },
             { from: 'css', to: 'css' },
+            { from: 'js', to: 'js' }
         ]),
     ],
 };
