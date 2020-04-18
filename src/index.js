@@ -64,7 +64,8 @@ const config = {
 
     physics: {
         enabled: true,
-        path: 'http://localhost:8085/js/mage.physics.js'
+        path: 'http://localhost:8085/js/mage.physics.js',
+        gravity: [0, 0.001, 0]
     },
 
     tween: {

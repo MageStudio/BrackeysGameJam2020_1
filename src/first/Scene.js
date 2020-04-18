@@ -73,7 +73,7 @@ export default class FlatGrid extends BaseScene {
     };
 
     setUpCar = () => {
-        this.car = ModelsEngine.getModel('buggy.blue');
+        this.car = ModelsEngine.getModel('buggy.blue', { physics: { density: 1, friction: 0.9, restitution: 0.1 } });
         window.car = this.car;
 
         this.car.addSound('engine', { loop: true, autoplay: false });
@@ -81,14 +81,14 @@ export default class FlatGrid extends BaseScene {
         this.car.sound.start();
         this.car.setMaterialFromName('lambert');
         this.car.scale({ x : 0.5, y: 0.5, z: 0.5 });
-        this.car.position({ y: .3 });
+        this.car.position({ y: 5 });
 
-        this.car.add([
-            ModelsEngine.getModel('wheel.front.left'),
-            ModelsEngine.getModel('wheel.front.right'),
-            ModelsEngine.getModel('wheel.rear.left'),
-            ModelsEngine.getModel('wheel.rear.right')
-        ]);
+        // this.car.add([
+        //     ModelsEngine.getModel('wheel.front.left'),
+        //     ModelsEngine.getModel('wheel.front.right'),
+        //     ModelsEngine.getModel('wheel.rear.left'),
+        //     ModelsEngine.getModel('wheel.rear.right')
+        // ]);
 
         //this.car.addScript('carScript');
 
@@ -96,7 +96,7 @@ export default class FlatGrid extends BaseScene {
     }
 
     setUpPlane = () => {
-        const plane = ModelsEngine.getModel('plane');
+        const plane = ModelsEngine.getModel('plane', { physics: { type: 'plane', move: false, density: 1, friction: 0.9, restitution: 0.1 } } );
         plane.setMaterialFromName('lambert');
         plane.setColor(GROUND_COLOR);
 
@@ -114,11 +114,11 @@ export default class FlatGrid extends BaseScene {
     }
 
     setUpTargets = () => {
-        const targetBlue = ModelsEngine.getModel('target.blue');
-        const targetRed = ModelsEngine.getModel('target.red');
+        const targetBlue = ModelsEngine.getModel('target.blue', { physics: { move: false } });
+        const targetRed = ModelsEngine.getModel('target.red', { physics: { move: false } });
 
-        const targetBlueGoal = ModelsEngine.getModel('target.blue.goal');
-        const targetRedGoal = ModelsEngine.getModel('target.red.goal');
+        const targetBlueGoal = ModelsEngine.getModel('target.blue.goal', { physics: { move: false } });
+        const targetRedGoal = ModelsEngine.getModel('target.red.goal', { physics: { move: false } });
 
 
         targetBlue.setColor(0xa8e6cf); // c8d9eb
@@ -130,9 +130,9 @@ export default class FlatGrid extends BaseScene {
 
     setUpEnv = () => {
         const pc = {
-            case: ModelsEngine.getModel('pc.case'),
-            keyboard: ModelsEngine.getModel('pc.keyboard'),
-            monitor: ModelsEngine.getModel('pc.monitor')
+            case: ModelsEngine.getModel('pc.case', { physics: { move: false } }),
+            keyboard: ModelsEngine.getModel('pc.keyboard', { physics: { move: false } }),
+            monitor: ModelsEngine.getModel('pc.monitor', { physics: { move: false } })
         };
 
         pc.case.setMaterialFromName('lambert');
